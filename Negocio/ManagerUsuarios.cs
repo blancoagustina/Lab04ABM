@@ -58,6 +58,39 @@ namespace Negocio
             return listaUsuarios;
         }
 
+        public Usuario GetOne(int ID)
+        {
+            Usuario usuarioActual=null;
+
+            SqlCommand cmdGetUsuarios = new SqlCommand("select * from usuarios where id=@id", this.Conn);
+            cmdGetUsuarios.Parameters.Add("@id", SqlDbType.Int).Value = ID;
+
+            this.Conn.Open();
+
+            SqlDataReader rdrUsuarios = cmdGetUsuarios.ExecuteReader();
+
+            if (rdrUsuarios!=null && rdrUsuarios.Read())
+            {
+                usuarioActual = new Usuario();
+                usuarioActual.Id = (int)rdrUsuarios["id"];
+                usuarioActual.TipoDoc = (Nullable<int>)rdrUsuarios["tipo_doc"];
+                usuarioActual.NroDoc = (Nullable<int>)rdrUsuarios["nro_doc"];
+                usuarioActual.FechaNac = rdrUsuarios["fecha_nac"].ToString();
+                usuarioActual.Apellido = rdrUsuarios["apellido"].ToString();
+                usuarioActual.Nombre = rdrUsuarios["nombre"].ToString();
+                usuarioActual.Direccion = rdrUsuarios["direccion"].ToString();
+                usuarioActual.Telefono = rdrUsuarios["telefono"].ToString();
+                usuarioActual.Email = rdrUsuarios["email"].ToString();
+                usuarioActual.Celular = rdrUsuarios["celular"].ToString();
+                usuarioActual.NombreUsuario = rdrUsuarios["usuario"].ToString();
+                usuarioActual.Clave = rdrUsuarios["clave"].ToString();
+            }
+
+            this.Conn.Close();
+
+            return usuarioActual;
+        }
+
         public void BorrarUsuario(Usuario usuarioActual)
         {
             SqlCommand cmdDeleteUsuario = new SqlCommand(" DELETE FROM usuarios WHERE id=@id ", this.Conn);
@@ -122,8 +155,9 @@ namespace Negocio
             
             this.Conn.Open();
             
-            cmdInsertarUsuario.ExecuteNonQuery();
-            
+            int ID = (int)cmdInsertarUsuario.ExecuteScalar();
+            usuarioActual.Id = ID;
+
             this.Conn.Close();
         }
 

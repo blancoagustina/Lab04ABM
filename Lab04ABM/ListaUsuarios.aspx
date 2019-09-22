@@ -22,7 +22,7 @@
                     <asp:HyperLinkField DataNavigateUrlFields="Id" DataNavigateUrlFormatString="ListaUsuarios.aspx?id={0}" Text="Editar" />
                 </Columns>
             </asp:GridView>
-            <table style="width:100%;">
+            <table style="width:100%;" id="tblUsuario">
                 <tr>
                     <td style="text-align: right">&nbsp;</td>
                     <td colspan="2">
@@ -51,11 +51,11 @@
                     </td>
                     <td>
                         <asp:RadioButtonList ID="rblTipoDoc" runat="server">
-                            <asp:ListItem>DNI</asp:ListItem>
-                            <asp:ListItem>LC / LE</asp:ListItem>
-                            <asp:ListItem>Cédula Identidad</asp:ListItem>
-                            <asp:ListItem>Pasaporte</asp:ListItem>
-                            <asp:ListItem>Otro</asp:ListItem>
+                            <asp:ListItem Selected="True" Value="0">DNI</asp:ListItem>
+                            <asp:ListItem Value="1">LC / LE</asp:ListItem>
+                            <asp:ListItem Value="2">Cédula Identidad</asp:ListItem>
+                            <asp:ListItem Value="3">Pasaporte</asp:ListItem>
+                            <asp:ListItem Value="4">Otro</asp:ListItem>
                         </asp:RadioButtonList>
                     </td>
                 </tr>
@@ -76,6 +76,7 @@
                             <asp:ListItem></asp:ListItem>
                         </asp:DropDownList>
                         <asp:DropDownList ID="drpFechaNacMes" runat="server">
+                            <asp:ListItem></asp:ListItem>
                             <asp:ListItem>Enero</asp:ListItem>
                             <asp:ListItem>Febrero</asp:ListItem>
                             <asp:ListItem>Marzo</asp:ListItem>
@@ -97,7 +98,8 @@
                         <asp:Label ID="lblDireccion" runat="server" Text="Dirección"></asp:Label>
                     </td>
                     <td>
-                        <textarea id="txaDireccion" cols="20" name="S1" rows="2"></textarea></td>
+                        <asp:TextBox ID="txtDireccion" runat="server" Rows="5" TextMode="MultiLine"></asp:TextBox>
+                    </td>
                 </tr>
                 <tr>
                     <td style="text-align: right">
@@ -149,10 +151,10 @@
                 </tr>
                 <tr>
                     <td style="text-align: right">
-                        <asp:Button ID="btnGuardar" runat="server" Text="Guardar" />
+                        <asp:Button ID="btnGuardar" runat="server" Text="Guardar" OnClick="btnGuardar_Click" />
                     </td>
                     <td>
-                        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" />
+                        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" OnClick="btnCancelar_Click" />
                     </td>
                 </tr>
             </table>
