@@ -10,7 +10,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:GridView ID="grdUsuarios" runat="server" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="odsUsuarios" OnSelectedIndexChanged="grdUsuarios_SelectedIndexChanged">
+            <asp:GridView ID="grdUsuarios" runat="server" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="odsUsuarios">
                 <Columns>
                     <asp:CommandField ShowDeleteButton="True" />
                     <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id" />
