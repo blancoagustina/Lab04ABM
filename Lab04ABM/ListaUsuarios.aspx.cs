@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using Negocio;
+﻿using Negocio;
+using System;
 
 
 public partial class ListaUsuarios : System.Web.UI.Page
@@ -58,22 +53,25 @@ public partial class ListaUsuarios : System.Web.UI.Page
         this.txtNombreUsuario.Text = usuario.NombreUsuario;
         this.txtClave.Text = usuario.Clave;
         this.txtConfirmarClave.Text = usuario.Clave;
-            
     }
 
     private void cargarDrpFechaNacDia()
     {
-        for (int i = 0; i < 10; i++)
+        this.drpFechaNacDia.Items.Add("-1");
+        this.drpFechaNacDia.Items[0].Text = "Seleccione un dia";
+        this.drpFechaNacDia.Items[0].Value = "-1";
+
+        for (int i = 1; i < 10; i++)
         {
-            this.drpFechaNacDia.Items.Add("0"+(i+1));
-            this.drpFechaNacDia.Items[i].Text = "0"+(i+1);
-            this.drpFechaNacDia.Items[i].Value = "0"+(i+1);
+            this.drpFechaNacDia.Items.Add("0"+i);
+            this.drpFechaNacDia.Items[i].Text = "0"+i;
+            this.drpFechaNacDia.Items[i].Value = "0"+i;
         }
-        for (int i = 10; i < 31; i++)
+        for (int i = 10; i <= 31; i++)
         {
-            this.drpFechaNacDia.Items.Add(i+1+"");
-            this.drpFechaNacDia.Items[i].Text = i + 1 + "";
-            this.drpFechaNacDia.Items[i].Value = i + 1 + "";
+            this.drpFechaNacDia.Items.Add(i+"");
+            this.drpFechaNacDia.Items[i].Text = i+"";
+            this.drpFechaNacDia.Items[i].Value = i+"";
         }
     }
 
@@ -87,8 +85,8 @@ public partial class ListaUsuarios : System.Web.UI.Page
         usuario.NroDoc = int.Parse(this.txtNroDoc.Text);
 
         usuario.FechaNac = this.drpFechaNacDia.SelectedValue+"/";
-        usuario.FechaNac = this.drpFechaNacMes.SelectedValue+"/";
-        usuario.FechaNac = this.txtFechaNacAnio.Text;
+        usuario.FechaNac = usuario.FechaNac + this.drpFechaNacMes.SelectedValue+"/";
+        usuario.FechaNac = usuario.FechaNac + this.txtFechaNacAnio.Text;
         usuario.Direccion = this.txtDireccion.Text;
         usuario.Telefono = this.txtTelefono.Text;
         usuario.Email = this.txtEmail.Text;
@@ -106,8 +104,6 @@ public partial class ListaUsuarios : System.Web.UI.Page
         {
             mu.AgregarUsuario(usuario);
         }
-
-        this.grdUsuarios.DataBind();
     }
 
     protected void btnCancelar_Click(object sender, EventArgs e)
