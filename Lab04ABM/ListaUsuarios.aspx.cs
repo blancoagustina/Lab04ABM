@@ -9,15 +9,16 @@ public partial class ListaUsuarios : System.Web.UI.Page
         if (!this.IsPostBack)
         {
             this.cargarDrpFechaNacDia();
+            if (PaginaEnEstadoEdicion())
+            {
+                CargarDatosUsuario();
+            }
+            else
+            {
+                this.lblAccion.Text = "Alta de usuario";
+            }
         }
-        if (PaginaEnEstadoEdicion())
-        {
-            CargarDatosUsuario();
-        }
-        else
-        {
-            this.lblAccion.Text = "Alta de usuario";
-        }
+       
     }
 
     private bool PaginaEnEstadoEdicion()
