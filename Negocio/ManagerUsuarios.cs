@@ -17,7 +17,8 @@ namespace Negocio
 
         public ManagerUsuarios()
         {
-            this.Conn = new SqlConnection("Data Source = .\\sqlexpress; Initial Catalog = academia; Integrated Security = false; user=net;password=net");
+            this.Conn = new SqlConnection("Data Source = localhost; Initial Catalog = academia; Integrated Security = true");
+                //new SqlConnection("Data Source = .\\sqlexpress; Initial Catalog = academia; Integrated Security = false; user=net;password=net");
         }
 
         public List<Usuario> GetAll()
